@@ -1,3 +1,4 @@
+import { CompositionCardComponent } from './components/composition-card/composition-card.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CompositionEditorComponent } from './components/composition-editor/composition-editor.component';
@@ -10,6 +11,7 @@ const routes: Routes = [
   {path:'search', component: SearchComponent},
   {path:'dashboard', component: DashboardComponent},
   {path:'editor', component: CompositionEditorComponent},
+  {path:'compo', component: CompositionCardComponent},
 ];
 
 @NgModule({
