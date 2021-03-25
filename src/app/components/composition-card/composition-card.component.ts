@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Composition } from 'src/app/models/composition';
+import { Component, Input, OnInit } from '@angular/core';
+import { faHandshake } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-composition-card',
@@ -6,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./composition-card.component.sass']
 })
 export class CompositionCardComponent implements OnInit {
+
+  @Input() composition: Composition;
+  faHandshake = faHandshake;
 
   constructor() { }
 

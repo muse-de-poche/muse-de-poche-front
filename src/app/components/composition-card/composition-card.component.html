@@ -1,16 +1,23 @@
-    <div class="card col-xl-4">
-        <h5 class="card-header">Titre de la composition</h5>
+    <div class="card">
+        <h5 class="card-header">{{composition.title}}</h5>
         <div class="card-body">
-          <h5 class="card-title">Nom auteur</h5>
-          <p class="card-text">25/03/2021 (Last Update)</p>
+            <div class="row">
+                <div class="col-xl-8 col-md-4">
+                    <h5 class="card-title">{{composition.owner.pseudo}}</h5>
+                    <p class="card-text">{{composition.lastUpdate}} (Last Update)</p>
+                    <p class="card-text">{{composition.playsNumber}} vues</p>
+                </div>
+                <div class="col-xl-4 col-md-8">
+                    <button class="btn btn-info button" placeholder="collabortion">
+                        <fa-icon [icon]="faHandshake" size="3x" [styles]="{'stroke': 'white', 'color': 'white'}"></fa-icon>
+                    </button>
+                </div>
+            </div>
           <figure>
-            <audio controls src="">
+            <audio controls src="{{composition.blobPath}}">
                 Your browser does not support the
                 <code>audio</code> element.
             </audio>
         </figure>
-          <button class="btn btn-primary button">Demande de collabortion</button>
         </div>
       </div>
-
-

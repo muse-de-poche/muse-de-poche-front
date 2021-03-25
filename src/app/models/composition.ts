@@ -1,3 +1,4 @@
+import { Sound } from './sound';
 import { Composer } from './composer'
 import { Collaboration } from './collaboration'
 import { Metronome } from './metronome'
@@ -13,5 +14,5 @@ export interface Composition {
         collaborations?: Collaboration[],
         metronome?: Metronome,
         tracks?: Track[],
-        blobPath: Blob
+        blobPath: String
 }

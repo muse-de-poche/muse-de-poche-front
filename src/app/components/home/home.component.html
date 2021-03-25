@@ -1,19 +1,27 @@
 <div class="container-fluid">
     <div class="row">
-        <h2>+ Populaire</h2>
         <div class="col-xl-4 col-md-4 col-xs-4">
+            <h2>+ Populaire</h2>
             <ul class="list-group">
-                <li class="list-group-item" *ngFor="let mv of mostViewed"></li>
+                <li *ngFor="let mv of mostViewed">
+                    <app-composition-card [composition]="mv"></app-composition-card>
+                </li>
             </ul>
         </div>
         <div class="col-xl-4 col-md-4 col-xs-4">
+            <h2>+ Récent</h2>
             <ul class="list-group">
-                <li class="list-group-item" *ngFor="let ra of recentlyAdded"></li>
+                <li *ngFor="let ra of recentlyAdded">
+                    <app-composition-card [composition]="ra"></app-composition-card>
+                </li>
             </ul>
         </div>
         <div class="col-xl-4 col-md-4 col-xs-4">
+            <h2>Dernière maj</h2>
             <ul class="list-group">
-                <li class="list-group-item" *ngFor="let lu of lastUpdated"></li>
+                <li *ngFor="let lu of lastUpdated">
+                    <app-composition-card [composition]="lu"></app-composition-card>
+                </li>
             </ul>
         </div>
     </div>
