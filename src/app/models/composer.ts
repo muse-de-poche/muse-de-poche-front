@@ -1,5 +1,6 @@
 import { Collaboration } from './collaboration';
 import { Composition } from 'src/app/models/composition';
+
 export interface Composer {
     id: number,
     pseudo: String,
@@ -11,5 +12,4 @@ export interface Composer {
     subscribedDate: Date,
     compositions?: Composition[],
     collaborations?: Collaboration[]
-
 }

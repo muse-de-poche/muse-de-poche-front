@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <h5>Connexion</h5>
+</div>
+<div class="modal-body">
+    <form class="row g-3 needs-validation" [formGroup]="form" (ngSubmit)='login()'>
+        <div class="col-md-6">
+            <label for="login" class="form-label">Pseudo ou Email</label>
+            <input type="text" class="form-control" id="login" formControlName="login" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input type="password" class="form-control" id="password" formControlName="password" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Connexion</button>
+        </div>
+    </form>
+</div>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,9 @@ import { CompositionCardComponent } from './components/composition-card/composit
 import { TrackComponent } from './components/composition-editor/track/track.component';
 import { MetronomeComponent } from './components/composition-editor/metronome/metronome.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SignupComponent } from './components/signup/signup.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SigninComponent } from './components/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +30,18 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CompositionEditorComponent,
     CompositionCardComponent,
     TrackComponent,
-    MetronomeComponent
+    MetronomeComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
