@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Composer } from 'src/app/models/composer';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
 
   closeResult: String = '';
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -40,6 +40,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     sessionStorage.clear();
+    this.router.navigateByUrl('');
   }
 
 }
