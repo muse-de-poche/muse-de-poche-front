@@ -12,6 +12,7 @@ const routes: Routes = [
   {path:'dashboard', component: DashboardComponent},
   {path:'editor', component: CompositionEditorComponent},
   {path:'compo', component: CompositionCardComponent},
+  {path:'compo', component: CompositionCardComponent}
 ];
 
 @NgModule({

@@ -33,4 +33,8 @@ export class CompositionService {
     return this.http.get<Composition[]>(this.route+'/composer/'+id);
   }
   
+  getCompositionById(id: number):Observable<Composition> {
+    return this.http.get<Composition>(this.route+'/'+id);
+  }
+
 }

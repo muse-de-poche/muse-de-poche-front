@@ -1,1 +1,44 @@
-<p>composition-editor works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-2">
+            {{composition.title}}
+        </div>
+        <div class="col-xl-8 d-flex justify-content-evenly">
+            <fa-icon [icon]="faPlay" size="4x"></fa-icon>
+            <fa-icon [icon]="faStop" size="4x"></fa-icon>
+            <fa-icon [icon]="faCircle" size="4x"></fa-icon>
+            <fa-icon [icon]="faStepBackward" size="4x"></fa-icon>
+            <fa-icon [icon]="faBackward" size="4x"></fa-icon>
+            <fa-icon [icon]="faForward" size="4x"></fa-icon>
+        </div>
+        <div class="col-xl-1">
+            <!-- Metronome -->
+            <button type="button" class="btn btn-outline-info" (click)="open(signin)">Métronome</button>
+        </div>
+        <div class="col-xl-1">
+            <button type="button" class="btn btn-link">Collaborateur(s)</button>
+        </div>
+    </div>
+    <div class="row">
+            <!-- Regle -->
+        <!-- Sounds -->
+        <ng-template ngFor let-track [ngForOf]="composition.tracks" let-i="index" >
+            <div class="col-xl-2 border">
+                {{track.instrument}}
+                <button></button>
+            </div>
+            <div class="col-xl-10 border">
+                <ng-template ngFor let-sound [ngForOf]="track.sounds" let-j="index" >
+                    <canvas>{{draw()}}</canvas>
+                </ng-template>
+            </div>
+          </ng-template>
+        <div >
+            <button><fa-icon [icon]="faPlus" size="4x"></fa-icon></button>
+        </div>
+    </div>
+</div>
+
+<ng-template #signin let-modal>
+    <app-signin></app-signin>
+</ng-template>
