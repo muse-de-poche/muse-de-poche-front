@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <h2>Récent</h2>
+        <div class="col-xl-12 col-md-12 col-xs-12">
+            
+            <ul class="list-inline">
+                <li class="list-inline-item col-xl-4 col-md-4 col-xs-4" *ngFor="let ra of recentlyAdded">
+                    <app-composition-card [composition]="ra"></app-composition-card>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xl-12 col-md-12 col-xs-12">
+            <h2>Statistique</h2>
+            <p></p>
+        </div>
+    </div>
+</div>

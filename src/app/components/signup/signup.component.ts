@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
   signup() {
     this.api.create(this.form.value).subscribe(result => {
       if (result.ok) {
-        sessionStorage.setItem("composer", JSON.stringify(result));
+        sessionStorage.setItem("composer", JSON.stringify(result.body));
       }
     });
   }

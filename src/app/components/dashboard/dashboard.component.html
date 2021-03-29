@@ -1,1 +1,25 @@
-<p>dashboard works!</p>
+
+<div class="container">
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink>Aperçu</a>
+          <ng-template ngbNavContent>
+            <app-preview [id]="composer.id"></app-preview>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink>Mes compositions</a>
+          <ng-template ngbNavContent>
+            <app-my-compositions [id]="composer.id"></app-my-compositions>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="3">
+          <a ngbNavLink>Paramètres</a>
+          <ng-template ngbNavContent>
+            <app-settings></app-settings>
+          </ng-template>
+        </li>
+      </ul>
+      
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

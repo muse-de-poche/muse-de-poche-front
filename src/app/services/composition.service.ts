@@ -1,3 +1,4 @@
+import { Composer } from 'src/app/models/composer';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -10,8 +11,11 @@ import { Composition } from 'src/app/models/composition';
 export class CompositionService {
 
   readonly route: string = environment.apiUrl + '/composition';
+  idComposer :number;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    
+  }
 
   getMostViewedCompositions():Observable<Composition[]> {
     return this.http.get<Composition[]>(this.route+'/plays-number');
@@ -23,6 +27,10 @@ export class CompositionService {
 
   getLastUpdatedCompositions():Observable<Composition[]> {
     return this.http.get<Composition[]>(this.route+'/update-date');
+  }
+
+  getCompositionByComposer(id: number):Observable<Composition[]> {
+    return this.http.get<Composition[]>(this.route+'/composer/'+id);
   }
   
 }

@@ -18,6 +18,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SignupComponent } from './components/signup/signup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SigninComponent } from './components/signin/signin.component';
+import { PreviewComponent } from './components/dashboard/preview/preview.component';
+import { MyCompositionsComponent } from './components/dashboard/my-compositions/my-compositions.component';
+import { SettingsComponent } from './components/dashboard/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { SigninComponent } from './components/signin/signin.component';
     TrackComponent,
     MetronomeComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    PreviewComponent,
+    MyCompositionsComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

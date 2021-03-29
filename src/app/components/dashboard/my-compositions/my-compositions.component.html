@@ -1,0 +1,8 @@
+<div class="col-xl-12 col-md-12 col-xs-12">
+    <h2>Récent</h2>
+    <ul class="list-group">
+        <li *ngFor="let ra of recentlyAdded">
+            <app-composition-card [composition]="ra"></app-composition-card>
+        </li>
+    </ul>
+</div>

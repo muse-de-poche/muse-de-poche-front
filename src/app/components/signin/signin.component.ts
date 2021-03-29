@@ -28,7 +28,7 @@ export class SigninComponent implements OnInit {
   login() {
     this.api.login(this.form.value).subscribe(result => {
       if (result.ok) {
-        sessionStorage.setItem("composer", JSON.stringify(result));
+        sessionStorage.setItem("composer", JSON.stringify(result.body));
         this.router.navigateByUrl('dashboard');
         this.modal.dismissAll();
       }
