@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { NgAudioRecorderModule } from 'ng-audio-recorder';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,7 +22,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { PreviewComponent } from './components/dashboard/preview/preview.component';
 import { MyCompositionsComponent } from './components/dashboard/my-compositions/my-compositions.component';
 import { SettingsComponent } from './components/dashboard/settings/settings.component';
-import { SoundComponent } from './components/sound/sound.component';
+import { SoundComponent } from './components/composition-editor/sound/sound.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { SoundComponent } from './components/sound/sound.component';
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgAudioRecorderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

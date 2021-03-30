@@ -65,7 +65,9 @@ export class SoundComponent implements OnInit, OnDestroy {
         skipSeconds: 10,
         barWidth: 2,
         barRadius: 4,
-        mediaControls: true,
+        height: 96,
+        scrollParent: true,
+        partialRender: true,
         plugins: [
           TimelinePlugin.create({
             container: '#wave-timeline'
