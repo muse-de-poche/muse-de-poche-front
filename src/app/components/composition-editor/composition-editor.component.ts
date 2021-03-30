@@ -64,7 +64,8 @@ export class CompositionEditorComponent implements OnInit {
   ngOnInit(): void {
     this.api.getCompositionById(3).subscribe((compo: Composition) => {
       this.composition = compo;
-      // console.log(this.composition)
+      this.curTrack = this.composition.tracks[this.composition.tracks.length - 1];
+      console.log(this.composition)
     });
     window.AudioContext = window.AudioContext;
     this.context = new AudioContext();
