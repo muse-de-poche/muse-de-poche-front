@@ -21,6 +21,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { PreviewComponent } from './components/dashboard/preview/preview.component';
 import { MyCompositionsComponent } from './components/dashboard/my-compositions/my-compositions.component';
 import { SettingsComponent } from './components/dashboard/settings/settings.component';
+import { SoundComponent } from './components/sound/sound.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { SettingsComponent } from './components/dashboard/settings/settings.comp
     SigninComponent,
     PreviewComponent,
     MyCompositionsComponent,
-    SettingsComponent
+    SettingsComponent,
+    SoundComponent
   ],
   imports: [
     BrowserModule,

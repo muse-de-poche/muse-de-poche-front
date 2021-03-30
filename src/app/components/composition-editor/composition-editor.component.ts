@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { faBackward, faCircle, faForward, faPlay, faPlus, faStepBackward, faStop } from '@fortawesome/free-solid-svg-icons';
+import { faBackward, faCircle, faForward, faPause, faPlay, faPlus, faStepBackward, faStop } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Composition } from 'src/app/models/composition';
-import { Track } from 'src/app/models/track';
 import { CompositionService } from 'src/app/services/composition.service';
+import { SoundServiceService } from 'src/app/services/sound-service.service';
+import { SoundComponent } from '../sound/sound.component';
 
 @Component({
   selector: 'app-composition-editor',
@@ -14,6 +15,7 @@ import { CompositionService } from 'src/app/services/composition.service';
 export class CompositionEditorComponent implements OnInit {
 
   faPlay = faPlay;
+  faPause = faPause;
   faStop = faStop;
   faCircle = faCircle;
   faStepBackward = faStepBackward;
@@ -21,28 +23,29 @@ export class CompositionEditorComponent implements OnInit {
   faForward = faForward;
   faPlus = faPlus;
 
+  playButton: boolean = false;
+
   closeResult: String = '';
 
   @Input() compositionId: number
   composition:Composition;
+  context: AudioContext;
 
-  tracks: Track[] = [
-    {
-      id: 1,
-      duration: 10,
-      instrument: "String",
-      composition: null,
-      sounds: []
-    }
-  ];
+  @ViewChild(SoundComponent) soundComp: SoundComponent[];
 
-  constructor(private modalService: NgbModal, private router: Router, private api: CompositionService) { }
+  constructor(private modalService: NgbModal,
+     private router: Router,
+      private api: CompositionService,
+      private soundService: SoundServiceService
+      ) { }
 
   ngOnInit(): void {
-    this.api.getCompositionById(7).subscribe((compo:Composition) => {
+    this.api.getCompositionById(3).subscribe((compo:Composition) => {
       this.composition = compo;
-      console.log(this.composition)
+      // console.log(this.composition)
     });
+    window.AudioContext = window.AudioContext;
+    this.context = new AudioContext();
   }
 
   open(content) {
@@ -61,6 +64,21 @@ export class CompositionEditorComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  play() {
+    this.soundService.startPlay("play");
+    this.playButton = !this.playButton;
+  }
+  stop() {
+    this.soundService.stopPlay("stop");
+    this.playButton = false;
+  }
+  skipBackward() {
+    this.soundService.skipBackward("backward");
+  }
+  skipForward() {
+    this.soundService.skipForward("forward");
   }
 
 }

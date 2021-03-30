@@ -4,12 +4,12 @@
             {{composition.title}}
         </div>
         <div class="col-xl-8 d-flex justify-content-evenly">
-            <fa-icon [icon]="faPlay" size="4x"></fa-icon>
-            <fa-icon [icon]="faStop" size="4x"></fa-icon>
+            <fa-icon role="button" (click)="play()" [icon]="!playButton ? faPlay: faPause" size="4x"></fa-icon>
+            <fa-icon role="button" (click)="stop()" [icon]="faStop" size="4x"></fa-icon>
             <fa-icon [icon]="faCircle" size="4x"></fa-icon>
-            <fa-icon [icon]="faStepBackward" size="4x"></fa-icon>
-            <fa-icon [icon]="faBackward" size="4x"></fa-icon>
-            <fa-icon [icon]="faForward" size="4x"></fa-icon>
+            <fa-icon role="button" [icon]="faStepBackward" size="4x"></fa-icon>
+            <fa-icon role="button" (click)="skipBackward()" [icon]="faBackward" size="4x"></fa-icon>
+            <fa-icon role="button" (click)="skipForward()" [icon]="faForward" size="4x"></fa-icon>
         </div>
         <div class="col-xl-1">
             <!-- Metronome -->
@@ -20,20 +20,20 @@
         </div>
     </div>
     <div class="row">
-            <!-- Regle -->
+        <!-- Regle -->
         <!-- Sounds -->
-        <ng-template ngFor let-track [ngForOf]="composition.tracks" let-i="index" >
-            <div class="col-xl-2 border">
+        <ng-template ngFor let-track [ngForOf]="composition.tracks" let-i="index">
+            <div class="col-xl-1 border">
                 {{track.instrument}}
                 <button></button>
             </div>
-            <div class="col-xl-10 border">
-                <ng-template ngFor let-sound [ngForOf]="track.sounds" let-j="index" >
-                    <canvas>{{draw()}}</canvas>
+            <div class="col-xl-11 border">
+                <ng-template ngFor let-sound [ngForOf]="track.sounds" let-j="index">
+                    <app-sound [context]="context" [sound]="sound"></app-sound>
                 </ng-template>
             </div>
-          </ng-template>
-        <div >
+        </ng-template>
+        <div>
             <button><fa-icon [icon]="faPlus" size="4x"></fa-icon></button>
         </div>
     </div>
