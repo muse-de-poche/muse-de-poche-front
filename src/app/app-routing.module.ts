@@ -10,9 +10,8 @@ const routes: Routes = [
   {path:'', component: HomeComponent},
   {path:'search', component: SearchComponent},
   {path:'dashboard', component: DashboardComponent},
-  {path:'editor', component: CompositionEditorComponent},
+  {path:'editor/:id', component: CompositionEditorComponent},
   {path:'compo', component: CompositionCardComponent},
-  {path:'compo', component: CompositionCardComponent}
 ];
 
 @NgModule({

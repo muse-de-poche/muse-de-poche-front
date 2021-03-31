@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
+import { AuthentificationService } from 'src/app/services/authentification.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   closeResult: String = '';
 
-  constructor(private modalService: NgbModal, private router: Router) { }
+  constructor(private modalService: NgbModal, public authService: AuthentificationService) { }
 
   ngOnInit(): void {
   }
@@ -32,15 +33,6 @@ export class HeaderComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
-  }
-
-  isSignin():boolean {
-    return sessionStorage.length == 1;
-  }
-
-  logout() {
-    sessionStorage.clear();
-    this.router.navigateByUrl('');
   }
 
 }

@@ -11,7 +11,6 @@ import { Composition } from 'src/app/models/composition';
 export class CompositionService {
 
   readonly route: string = environment.apiUrl + '/composition';
-  idComposer :number;
 
   constructor(private http: HttpClient) {
     

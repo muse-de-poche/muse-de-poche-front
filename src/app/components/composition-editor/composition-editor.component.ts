@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { faBackward, faCircle, faForward, faPause, faPlay, faPlus, faStepBackward, faStop } from '@fortawesome/free-solid-svg-icons';
+import { faBackward, faCircle, faDotCircle, faForward, faPause, faPlay, faPlus, faStepBackward, faStop } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgAudioRecorderService, OutputFormat } from 'ng-audio-recorder';
 
@@ -22,6 +22,7 @@ export class CompositionEditorComponent implements OnInit {
   faPause = faPause;
   faStop = faStop;
   faCircle = faCircle;
+  faDotCircle = faDotCircle;
   faStepBackward = faStepBackward;
   faBackward = faBackward;
   faForward = faForward;

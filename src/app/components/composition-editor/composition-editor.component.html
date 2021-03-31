@@ -6,7 +6,7 @@
         <div class="col-xl-8 d-flex justify-content-evenly">
             <fa-icon role="button" (click)="play()" [icon]="!playButton ? faPlay: faPause" size="4x"></fa-icon>
             <fa-icon role="button" (click)="stop()" [icon]="faStop" size="4x"></fa-icon>
-            <fa-icon role="button" (click)="!isRecording ? recording() : stopRecording()" [icon]="faCircle" size="4x" [styles]="{'stroke': 'black','color': 'red'}"></fa-icon>
+            <fa-icon role="button" (click)="!isRecording ? recording() : stopRecording()" [icon]="!isRecording ? faCircle : faDotCircle" size="4x" [styles]="{'stroke': 'black','color': 'red'}"></fa-icon>
             <fa-icon role="button" [icon]="faStepBackward" size="4x"></fa-icon>
             <fa-icon role="button" (click)="skipBackward()" [icon]="faBackward" size="4x"></fa-icon>
             <fa-icon role="button" (click)="skipForward()" [icon]="faForward" size="4x"></fa-icon>

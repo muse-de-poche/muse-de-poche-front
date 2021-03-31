@@ -14,7 +14,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     let composerJson: Composer = JSON.parse(sessionStorage.getItem('composer'));
     this.composer = composerJson;
-    console.log(this.composer);
   }
 
   active = 1;
