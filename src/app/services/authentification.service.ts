@@ -20,7 +20,7 @@ export class AuthentificationService {
   }
 
   isSignin(): boolean {
-    return sessionStorage.length == 1;
+    return sessionStorage.getItem("composer") != null;
   }
 
   getConnected():Composer {
