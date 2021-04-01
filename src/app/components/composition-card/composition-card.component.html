@@ -1,22 +1,24 @@
-    <div class="card">
-        <h5 class="card-header">{{composition.title}} <i>de {{composition.owner.pseudo}}</i></h5>
-        <div class="card-body">
-            <figure id="{{composition.id}}">
-                <audio controls src="{{composition.blobPath}}">
-                    Your browser does not support the
-                    <code>audio</code> element.
-                </audio>
-            </figure>
-            <div class="row">
-                <div class="col-xl-8 col-md-4">
-                    <p class="card-text" >{{composition.playsNumber}} vues ({{composition.createdDate}})</p>
-                </div>
-                <div class="col-xl-4 col-md-8">
-                    <button class="btn btn-info button" placeholder="collabortion">
-                        <fa-icon [icon]="faHandshake" size="1x" [styles]="{'stroke': 'white', 'color': 'white'}"></fa-icon>
-                    </button>
-                </div>
+<div class="card">
+    <h5 class="card-header">{{composition.title}} <i>de {{composition.owner.pseudo}}</i></h5>
+    <div class="card-body">
+        <figure id="{{composition.id}}">
+            <audio controls src="{{composition.blobPath}}">
+                Your browser does not support the
+                <code>audio</code> element.
+            </audio>
+        </figure>
+        <div class="row">
+            <div class="col-xl-8 col-md-4">
+                <p class="card-text">{{composition.playsNumber}} vues ({{composition.createdDate}})</p>
             </div>
-          
+            <div class="col-xl-4 col-md-8" *ngIf="authService.isSignin()">
+                <button *ngIf="!isEditable()" class="btn btn-info button" ngbTooltip="Je participe !">
+                    <fa-icon [icon]="faHandshake" size="1x" [styles]="{'stroke': 'white', 'color': 'white'}"></fa-icon>
+                </button>
+                <button *ngIf="isEditable()" [routerLink]="['/editor', composition.id]" class="btn btn-warning button" ngbTooltip="Modifier ?">
+                    <fa-icon [icon]="faEdit" size="1x" [styles]="{'stroke': 'white', 'color': 'white'}"></fa-icon>
+                </button>
+            </div>
         </div>
-      </div>
+    </div>
+</div>

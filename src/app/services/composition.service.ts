@@ -11,7 +11,6 @@ import { Composition } from 'src/app/models/composition';
 export class CompositionService {
 
   readonly route: string = environment.apiUrl + '/composition';
-  idComposer :number;
 
   constructor(private http: HttpClient) {
     
@@ -33,4 +32,8 @@ export class CompositionService {
     return this.http.get<Composition[]>(this.route+'/composer/'+id);
   }
   
+  getCompositionById(id: number):Observable<Composition> {
+    return this.http.get<Composition>(this.route+'/'+id);
+  }
+
 }

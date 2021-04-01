@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col-xl-1">
+        <button class="btn btn-warning" (click)="mute()"><fa-icon [icon]="isMute ? faVolumeMute : faVolumeDow" size="1x"></fa-icon></button>
+        <div width="50px">
+            <label for="volume">volume</label>
+            <input class="form-range" type="range" name="volume" id="volume" min="0" max="100" step="1" [disabled]="isMute" (change)="setVolume($event.target.value)">
+        </div>
+    </div>
+    <div class="col-xl-11">
+        <div id="wave-timeline"></div>
+        <div name="sound" id="waveform-{{id}}"></div>
+    </div>
+</div>
