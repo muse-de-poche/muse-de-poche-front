@@ -1,1 +1,48 @@
-<p>metronome works!</p>
+<div class="row">
+    <div class=" col-xl-6 d-inline-block justify-content-evenly align-self-center">
+        <h5 class="d-inline">BPM: {{ bpm }}</h5>
+    </div>
+    <div class="col-xl-6 d-inline-block justify-content-evenly align-self-center">
+        <button type="button" class="btn btn-secondary" ngbTooltip="Métronome" (click)="open(metronome)"><fa-icon [icon]="faCog" size="2x"></fa-icon></button>
+    </div>
+</div>
+<ng-template #metronome let-modal>
+
+    <div class="container">
+        <div class="modal-header text-center">
+            <h2 class="text-center">Métronome
+                <fa-icon [icon]="faCog" size="1x"></fa-icon>
+            </h2>
+        </div>
+        <div class=" modal-body row">
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="tempo">Tempo:</label><span> {{bpm}}</span>
+                    <input id="tempo" class='form-range' type="range" value="{{bpm}}" step="1" min='40' max='240' (input)="setTempo($event.target.value)">
+
+                </div>
+                <div>
+                    <label for="metric">Metric:</label><span> {{metric}}</span>
+                    <input type="range" class="form-range" name="metric" min="1" max="16" step="1" value="{{metric}}" id="metric" (change)="setMetric($event.target.value)">
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" (click)="setTernaire()">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">triplet mode</label>
+                </div>
+                <div class="form-group">
+                    <label for="metroSound">Sound</label>
+                    <select id="metroSound" class="form-control" #metro (change)="setSound(metro.value)">
+                        <option *ngFor="let sound of soundsList; let i" [value]="sound.index">{{sound.option}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button (click)="muteMetronome()">muter</button>
+            </div>
+        </div>
+        <div class="row modal-footer justify-content-evenly">
+            <button class="col-md-5 btn btn-secondary" (click)="toggle()">{{startStopValue}}</button>
+            <button class="col-md-5 btn btn-success" (click)="updateMetronome()">sauvegarder</button>
+        </div>
+    </div>
+</ng-template>

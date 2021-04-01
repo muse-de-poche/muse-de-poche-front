@@ -3,9 +3,9 @@
         <div class="col-xl-2">
             Titre
             <h5>{{composition.title}}</h5>
-            
+
         </div>
-        <div class="col-xl-8 d-flex justify-content-evenly align-self-center border">
+        <div class="col-xl-7 d-flex justify-content-evenly align-self-center border">
             <fa-icon *ngIf="!playButton" role="button" (click)="play()" [icon]="faPlay" size="4x" ngbTooltip="Jouer"></fa-icon>
             <fa-icon *ngIf="playButton" role="button" (click)="play()" [icon]="faPause" size="4x" ngbTooltip="Pause"></fa-icon>
             <fa-icon role="button" (click)="stop()" [icon]="faStop" size="4x" ngbTooltip="Stop"></fa-icon>
@@ -15,10 +15,7 @@
             <fa-icon role="button" (click)="skipBackward()" [icon]="faBackward" size="4x" ngbTooltip="Retour de 10s"></fa-icon>
             <fa-icon role="button" (click)="skipForward()" [icon]="faForward" size="4x" ngbTooltip="Avance de 10s"></fa-icon>
         </div>
-        <div class="col-xl-1 justify-content-evenly align-self-center">
-            <!-- Metronome -->
-            <button type="button" class="btn btn-secondary" ngbTooltip="Métronome"><fa-icon [icon]="faCog" size="2x"></fa-icon></button>
-        </div>
+        <app-metronome class=" col-xl-2 d-inline-block justify-content-evenly align-self-center" [metronome]="composition.metronome"></app-metronome>
         <div class="col-xl-1 justify-content-evenly align-self-center">
             <button type="button" class="btn btn-secondary" ngbTooltip="Groupe"><fa-icon [icon]="faUsers" size="2x"></fa-icon></button>
         </div>
