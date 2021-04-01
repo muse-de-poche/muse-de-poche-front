@@ -1,22 +1,26 @@
 <div class="container">
-    <div class="row">
+    <div class="row border mt-2 mb-2">
         <div class="col-xl-2">
-            {{composition.title}}
+            Titre
+            <h5>{{composition.title}}</h5>
+            
         </div>
-        <div class="col-xl-8 d-flex justify-content-evenly">
-            <fa-icon role="button" (click)="play()" [icon]="!playButton ? faPlay: faPause" size="4x"></fa-icon>
-            <fa-icon role="button" (click)="stop()" [icon]="faStop" size="4x"></fa-icon>
-            <fa-icon role="button" (click)="!isRecording ? recording() : stopRecording()" [icon]="!isRecording ? faCircle : faDotCircle" size="4x" [styles]="{'stroke': 'black','color': 'red'}"></fa-icon>
+        <div class="col-xl-8 d-flex justify-content-evenly align-self-center border">
+            <fa-icon *ngIf="!playButton" role="button" (click)="play()" [icon]="faPlay" size="4x" ngbTooltip="Jouer"></fa-icon>
+            <fa-icon *ngIf="playButton" role="button" (click)="play()" [icon]="faPause" size="4x" ngbTooltip="Pause"></fa-icon>
+            <fa-icon role="button" (click)="stop()" [icon]="faStop" size="4x" ngbTooltip="Stop"></fa-icon>
+            <fa-icon *ngIf="!isRecording" role="button" (click)="recording()" [icon]="faCircle" size="4x" ngbTooltip="Enregistrer"></fa-icon>
+            <fa-icon *ngIf="isRecording" role="button" (click)="stopRecording()" [icon]="faDotCircle" size="4x" [styles]="{'stroke': 'black','color': 'red'}" ngbTooltip="Stoper l'enregistrement"></fa-icon>
             <fa-icon role="button" [icon]="faStepBackward" size="4x"></fa-icon>
-            <fa-icon role="button" (click)="skipBackward()" [icon]="faBackward" size="4x"></fa-icon>
-            <fa-icon role="button" (click)="skipForward()" [icon]="faForward" size="4x"></fa-icon>
+            <fa-icon role="button" (click)="skipBackward()" [icon]="faBackward" size="4x" ngbTooltip="Retour de 10s"></fa-icon>
+            <fa-icon role="button" (click)="skipForward()" [icon]="faForward" size="4x" ngbTooltip="Avance de 10s"></fa-icon>
         </div>
-        <div class="col-xl-1">
+        <div class="col-xl-1 justify-content-evenly align-self-center">
             <!-- Metronome -->
-            <button type="button" class="btn btn-outline-info" (click)="open(signin)">Métronome</button>
+            <button type="button" class="btn btn-secondary" ngbTooltip="Métronome"><fa-icon [icon]="faCog" size="2x"></fa-icon></button>
         </div>
-        <div class="col-xl-1">
-            <button type="button" class="btn btn-link">Collaborateur(s)</button>
+        <div class="col-xl-1 justify-content-evenly align-self-center">
+            <button type="button" class="btn btn-secondary" ngbTooltip="Groupe"><fa-icon [icon]="faUsers" size="2x"></fa-icon></button>
         </div>
     </div>
     <div class="row">

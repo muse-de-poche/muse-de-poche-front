@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { faBackward, faCircle, faDotCircle, faForward, faPause, faPlay, faPlus, faStepBackward, faStop } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { faBackward, faCircle, faCog, faDotCircle, faForward, faPause, faPlay, faPlus, faStepBackward, faStop, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgAudioRecorderService, OutputFormat } from 'ng-audio-recorder';
 
@@ -26,6 +26,8 @@ export class CompositionEditorComponent implements OnInit {
   faStepBackward = faStepBackward;
   faBackward = faBackward;
   faForward = faForward;
+  faCog = faCog;
+  faUsers = faUsers;
   faPlus = faPlus;
 
   playButton: boolean = false;
@@ -37,21 +39,14 @@ export class CompositionEditorComponent implements OnInit {
 
   @ViewChild(SoundComponent) soundComp: SoundComponent[];
 
-
   context: AudioContext;
-  mediaStream = null;
-  recorder = null;
-  leftChannel: any[] = [];
-  rightChannel: any[] = [];
-  recordingLength: number;
-  sampleRate: number = 44100;
   isRecording: boolean = false;
   blob: Blob;
 
   curTrack: Track;
 
   constructor(private modalService: NgbModal,
-    private router: Router,
+    private route: ActivatedRoute,
     private api: CompositionService,
     private soundService: SoundServiceService,
     private trackService: TrackService,
@@ -63,7 +58,10 @@ export class CompositionEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.api.getCompositionById(3).subscribe((compo: Composition) => {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.compositionId = +params.get('id')
+    })
+    this.api.getCompositionById(this.compositionId).subscribe((compo: Composition) => {
       this.composition = compo;
       this.curTrack = this.composition.tracks[this.composition.tracks.length - 1];
       console.log(this.composition)
@@ -94,7 +92,7 @@ export class CompositionEditorComponent implements OnInit {
     let track: Track = {
       id: null,
       duration: 0,
-      instrument: 'triangle',
+      instrument: 'Track',
       composition: this.composition,
       sounds: []
     };
@@ -128,14 +126,12 @@ export class CompositionEditorComponent implements OnInit {
     console.log(this.curTrack);
   }
 
-
   recording() {
     this.isRecording = true;
     this.recorderService.startRecording();
   }
 
   stopRecording() {
-
     this.stop();
     this.isRecording = false;
     this.recorderService.stopRecording(OutputFormat.WEBM_BLOB).then((output: Blob) => {

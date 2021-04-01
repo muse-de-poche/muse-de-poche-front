@@ -5,13 +5,17 @@ import { CompositionEditorComponent } from './components/composition-editor/comp
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
   {path:'search', component: SearchComponent},
   {path:'dashboard', component: DashboardComponent},
+  {path:'editor', component: CompositionEditorComponent},
   {path:'editor/:id', component: CompositionEditorComponent},
   {path:'compo', component: CompositionCardComponent},
+  {path: '404', component: NotFoundComponent},
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

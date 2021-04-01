@@ -23,6 +23,7 @@ import { PreviewComponent } from './components/dashboard/preview/preview.compone
 import { MyCompositionsComponent } from './components/dashboard/my-compositions/my-compositions.component';
 import { SettingsComponent } from './components/dashboard/settings/settings.component';
 import { SoundComponent } from './components/composition-editor/sound/sound.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SoundComponent } from './components/composition-editor/sound/sound.comp
     PreviewComponent,
     MyCompositionsComponent,
     SettingsComponent,
-    SoundComponent
+    SoundComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
