@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { faCog } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faVolumeDown, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Metronome } from 'src/app/models/metronome';
@@ -26,6 +26,8 @@ export class MetronomeComponent implements OnInit, OnDestroy {
   };
 
   faCog = faCog;
+  faMuted = faVolumeMute;
+  faUnMuted = faVolumeDown
   closeResult: String = '';
   subscription: Subscription;
   
