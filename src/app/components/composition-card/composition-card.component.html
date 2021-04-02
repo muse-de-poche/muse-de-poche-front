@@ -12,7 +12,7 @@
                 <p class="card-text">{{composition.playsNumber}} vues ({{composition.createdDate}})</p>
             </div>
             <div class="col-xl-4 col-md-8" *ngIf="authService.isSignin()">
-                <button *ngIf="!isEditable()" class="btn btn-info button" ngbTooltip="Je participe !">
+                <button *ngIf="!isEditable()" class="btn btn-info button" ngbTooltip="Je participe !" (click)="open(collaboration)">
                     <fa-icon [icon]="faHandshake" size="1x" [styles]="{'stroke': 'white', 'color': 'white'}"></fa-icon>
                 </button>
                 <button *ngIf="isEditable()" [routerLink]="['/editor', composition.id]" class="btn btn-warning button" ngbTooltip="Modifier ?">
@@ -22,3 +22,7 @@
         </div>
     </div>
 </div>
+
+<ng-template #collaboration let-modal>
+    <app-collaboration [composition]="composition" [composer]="authService.getConnected()"></app-collaboration>
+</ng-template>
