@@ -45,7 +45,9 @@ import { CollaborationComponent } from './components/collaboration/collaboration
     MyCompositionsComponent,
     SettingsComponent,
     SoundComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    WorkgroupComponent,
+    CollaborationComponent
   ],
   imports: [
     BrowserModule,

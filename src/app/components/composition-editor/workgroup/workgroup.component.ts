@@ -52,7 +52,7 @@ export class WorkgroupComponent implements OnInit {
       text: this.composer.pseudo + " à le plaisir de t\'invité à composer le morceau " + this.composition.title
     }
     this.collaborationService.create(newCollab).subscribe(c => {
-      this.collaborations.push(c);
+      this.collaborations.push(c.body);
     });
   }
 

@@ -1,4 +1,3 @@
-import { Collaboration } from './../models/collaboration';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -14,9 +13,9 @@ export class CollaborationService {
 
   constructor(private http: HttpClient) { }
   
-  create(collaboration: Collaboration):Observable<Collaboration> {
-    return this.http.post<Collaboration>(this.route, collaboration);
-  }
+  // create(collaboration: Collaboration):Observable<Collaboration> {
+  //   return this.http.post<Collaboration>(this.route, collaboration);
+  // }
 
   hasTheEditingRightsOn(composerId:number, compositionId:number):Observable<Boolean> {
     return this.http.get<Boolean>(this.route+'/'+composerId+'/hasTheEditingRightsOn/'+compositionId);
