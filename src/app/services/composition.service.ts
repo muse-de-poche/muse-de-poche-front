@@ -1,7 +1,7 @@
 import { Composer } from 'src/app/models/composer';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Composition } from 'src/app/models/composition';
 
@@ -34,6 +34,10 @@ export class CompositionService {
   
   getCompositionById(id: number):Observable<Composition> {
     return this.http.get<Composition>(this.route+'/'+id);
+  }
+
+  create(composition:Composition):Observable<HttpResponse<Composition>> {
+    return this.http.post<Composition>(this.route, composition, {observe: 'response'});
   }
 
 }

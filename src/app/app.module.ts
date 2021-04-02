@@ -26,6 +26,7 @@ import { SoundComponent } from './components/composition-editor/sound/sound.comp
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { WorkgroupComponent } from './components/composition-editor/workgroup/workgroup.component';
 import { CollaborationComponent } from './components/collaboration/collaboration.component';
+import { NewCompoComponent } from './components/new-compo/new-compo.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CollaborationComponent } from './components/collaboration/collaboration
     SoundComponent,
     NotFoundComponent,
     WorkgroupComponent,
-    CollaborationComponent
+    CollaborationComponent,
+    NewCompoComponent
   ],
   imports: [
     BrowserModule,

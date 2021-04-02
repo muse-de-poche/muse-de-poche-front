@@ -7,12 +7,12 @@ import { Track } from './track'
 export interface Composition {
         id: number,
         title: String,
-        createdDate: Date,
-        lastUpdate: Date,
-        playsNumber: number,
+        createdDate?: Date,
+        lastUpdate?: Date,
+        playsNumber?: number,
         owner: Composer,
         collaborations?: Collaboration[],
         metronome?: Metronome,
         tracks?: Track[],
-        blobPath: String
+        blobPath?: String
 }
