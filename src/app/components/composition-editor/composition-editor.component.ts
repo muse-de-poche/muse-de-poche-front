@@ -169,4 +169,9 @@ export class CompositionEditorComponent implements OnInit {
     });
   }
 
+  deleteSound(track: Track) {
+    this.soundService.deleteSound(track.sounds[0].id).subscribe();
+    track.sounds.pop();
+  }
+
 }

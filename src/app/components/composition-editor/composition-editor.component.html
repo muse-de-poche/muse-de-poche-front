@@ -3,7 +3,7 @@
         <div class="col-xl-2">
             Titre
             <h5>{{composition.title}}</h5>
-            <i>de {{composition.owner.pseudo}}</i>   
+            <i>de {{composition.owner.pseudo}}</i>
         </div>
         <div class="col-xl-7 d-flex justify-content-evenly align-self-center border">
             <fa-icon *ngIf="!playButton" role="button" (click)="play()" [icon]="faPlay" size="4x" ngbTooltip="Jouer"></fa-icon>
@@ -25,7 +25,8 @@
         <!-- Sounds -->
         <ng-template ngFor let-track [ngForOf]="composition.tracks" let-i="index">
             <div (click)="setCurTrack(track)" class="col-xl-1 border" [ngClass]="(curTrack.id === track.id) ? 'bg-light border border-primary': '' ">
-                {{track.instrument}}
+                <div>{{track.instrument}}</div>
+                <button class="btn btn-danger" ngbTooltip="supprimer le son" (click)="deleteSound(track)">X</button>
             </div>
             <div class="col-xl-11 border" [ngClass]="(curTrack.id === track.id) ? 'bg-light border border-primary': '' ">
                 <ng-template ngFor let-sound [ngForOf]="track.sounds" let-j="index">

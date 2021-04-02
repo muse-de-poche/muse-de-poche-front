@@ -24,6 +24,10 @@ export class SoundServiceService {
     return this.http.post<any>(this.route+'/'+id, formData);
   }
 
+  deleteSound(id: number): Observable<any> {
+    return this.http.delete(this.route + '/' + id);
+  }
+
   startPlay(play: string) {
     this.soundObservable.next(play);
   }
