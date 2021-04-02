@@ -24,6 +24,7 @@ import { MyCompositionsComponent } from './components/dashboard/my-compositions/
 import { SettingsComponent } from './components/dashboard/settings/settings.component';
 import { SoundComponent } from './components/composition-editor/sound/sound.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { WorkgroupComponent } from './components/composition-editor/workgroup/workgroup.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MyCompositionsComponent,
     SettingsComponent,
     SoundComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    WorkgroupComponent
   ],
   imports: [
     BrowserModule,

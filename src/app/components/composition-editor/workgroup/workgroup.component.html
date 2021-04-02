@@ -1,0 +1,62 @@
+<div class="modal-header">
+    <h4 class="modal-title">Le groupe</h4>
+</div>
+<div class="modal-body">
+    <!-- <form [formGroup]="radioGroupForm"> -->
+    <form>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3">
+                    
+                </div>
+                <div class="col-xl-8">
+                    DROITS
+                </div>
+                <div class="col-xl-1">
+
+                </div>
+            </div>
+            <div *ngFor="let collab of collaborations; index as i" class="row">
+                <div class="col-xl-3">
+                    {{collab.composer.pseudo}}
+                    {{collab.right}}
+                </div>
+                <div class="btn-group btn-group-toggle col-xl-8" data-toggle="buttons" ngbRadioGroup name="rights">
+                    <label ngbButtonLabel class="btn-outline-primary">
+                        <input ngbButton type="radio" name="right" value="FULL" [checked]="collab.right === 'FULL' ? true : false"> Total
+                    </label>
+                    <label ngbButtonLabel class="btn-outline-primary">
+                        <input ngbButton type="radio" name="right" value="CREATE" [checked]="collab.right === 'CREATE' ? true : false"> Création
+                    </label>
+                    <label ngbButtonLabel class="btn-outline-primary">
+                        <input ngbButton type="radio" name="right" value="WRITE" [checked]="collab.right === 'WRITE' ? true : false"> Ecriture
+                    </label>
+                    <label ngbButtonLabel class="btn-outline-primary">
+                        <input ngbButton type="radio" name="right" value="READONLY" [checked]="true"> Lecture seulement
+                    </label>
+                </div>
+                <div class="col-xl-1">
+                    <fa-icon role="button" (click)="ban(i)" [icon]="faBan" size="2x" ngbTooltip="Banir ?" [styles]="{'color': 'red'}"></fa-icon>
+                </div>
+            </div>
+        </div>
+    </form>
+    <hr>
+    <ng-template #rt let-r="result" let-t="term">
+        <ngb-highlight [result]="r.pseudo" [term]="t"></ngb-highlight>
+    </ng-template>
+    <div class="input-group mb-3">
+        <input id="typeahead-focus" type="text" class="form-control" [(ngModel)]="composer" [ngbTypeahead]="search"
+            (focus)="focus$.next($any($event).target.value)" (click)="click$.next($any($event).target.value)"
+            #instance="ngbTypeahead" [resultTemplate]="rt" [inputFormatter]="formatter" placeholder="Pseudonyme" />
+        <button class="btn btn-outline-secondary" type="button" (click)="newCollaboration()">
+            <fa-icon [icon]="faPlus" size="x"></fa-icon>
+        </button>
+    </div>
+    <!-- <pre>{{radioGroupForm.value['model']}}</pre> -->
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success" type="submit" ngbTooltip="Sauvegarder">
+        <fa-icon [icon]="faCheck" size="x"></fa-icon>
+    </button>
+</div>
