@@ -128,6 +128,7 @@ export class CompositionEditorComponent implements OnInit {
 
   recording() {
     this.isRecording = true;
+    this.soundService.startPlay("play");
     this.recorderService.startRecording();
   }
 
