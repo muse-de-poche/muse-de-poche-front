@@ -6,6 +6,7 @@ import { NgAudioRecorderService, OutputFormat } from 'ng-audio-recorder';
 
 import { Composition } from 'src/app/models/composition';
 import { Track } from 'src/app/models/track';
+import { AuthentificationService } from 'src/app/services/authentification.service';
 import { CompositionService } from 'src/app/services/composition.service';
 import { SoundServiceService } from 'src/app/services/sound-service.service';
 import { TrackService } from 'src/app/services/track.service';
@@ -47,8 +48,9 @@ export class CompositionEditorComponent implements OnInit {
 
   constructor(private modalService: NgbModal,
     private route: ActivatedRoute,
-    private api: CompositionService,
+    private compositionService: CompositionService,
     private soundService: SoundServiceService,
+    private authService: AuthentificationService,
     private trackService: TrackService,
     private recorderService: NgAudioRecorderService
   ) {
@@ -61,17 +63,28 @@ export class CompositionEditorComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.compositionId = +params.get('id')
     })
-    this.api.getCompositionById(this.compositionId).subscribe((compo: Composition) => {
+    this.compositionService.getCompositionById(this.compositionId).subscribe((compo: Composition) => {
       this.composition = compo;
       this.curTrack = this.composition.tracks[this.composition.tracks.length - 1];
-      console.log(this.composition)
     });
     window.AudioContext = window.AudioContext;
     this.context = new AudioContext();
   }
 
+  isCurOwner(): Boolean {
+    return this.authService.getConnected().id == this.composition.owner.id;
+  }
+
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  openLg(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

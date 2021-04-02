@@ -22,4 +22,8 @@ export class ComposerService {
     return this.http.post(this.route+'/login', login, {observe: 'response'});
   }
 
+  all():Observable<Composer[]> {
+    return this.http.get<Composer[]>(this.route);
+  }
+
 }

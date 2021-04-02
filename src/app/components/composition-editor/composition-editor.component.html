@@ -3,7 +3,7 @@
         <div class="col-xl-2">
             Titre
             <h5>{{composition.title}}</h5>
-            
+            <i>de {{composition.owner.pseudo}}</i>   
         </div>
         <div class="col-xl-8 d-flex justify-content-evenly align-self-center border">
             <fa-icon *ngIf="!playButton" role="button" (click)="play()" [icon]="faPlay" size="4x" ngbTooltip="Jouer"></fa-icon>
@@ -20,7 +20,7 @@
             <button type="button" class="btn btn-secondary" ngbTooltip="Métronome"><fa-icon [icon]="faCog" size="2x"></fa-icon></button>
         </div>
         <div class="col-xl-1 justify-content-evenly align-self-center">
-            <button type="button" class="btn btn-secondary" ngbTooltip="Groupe"><fa-icon [icon]="faUsers" size="2x"></fa-icon></button>
+            <button type="button" class="btn btn-secondary" [disabled]="!isCurOwner()" ngbTooltip="Groupe" (click)="openLg(workgroup)"><fa-icon [icon]="faUsers" size="2x"></fa-icon></button>
         </div>
     </div>
     <div class="row">
@@ -42,6 +42,6 @@
     </div>
 </div>
 
-<ng-template #signin let-modal>
-    <app-signin></app-signin>
+<ng-template #workgroup let-modal>
+    <app-workgroup [composition]="composition"></app-workgroup>
 </ng-template>
