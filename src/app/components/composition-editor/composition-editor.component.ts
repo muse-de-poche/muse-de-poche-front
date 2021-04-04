@@ -1,8 +1,11 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { faBackward, faCircle, faCog, faDotCircle, faForward, faPause, faPlay, faPlus, faStepBackward, faStop, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faBackward, faBlender, faCircle, faCog, faDotCircle, faForward, faPause, faPlay, faPlus, faStepBackward, faStop, faTools, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgAudioRecorderService, OutputFormat } from 'ng-audio-recorder';
+import Crunker from 'crunker';
+
+import * as RecordRTC from 'recordrtc';
 
 import { Composition } from 'src/app/models/composition';
 import { Track } from 'src/app/models/track';
@@ -30,6 +33,8 @@ export class CompositionEditorComponent implements OnInit {
   faCog = faCog;
   faUsers = faUsers;
   faPlus = faPlus;
+  faTools = faTools;
+  faBlender = faBlender;
 
   playButton: boolean = false;
 
@@ -42,9 +47,20 @@ export class CompositionEditorComponent implements OnInit {
 
   context: AudioContext;
   isRecording: boolean = false;
-  blob: Blob;
 
   curTrack: Track;
+
+  // recorder RTC members
+  //Lets declare Record OBJ
+  record;
+  //Will use this flag for toggeling recording
+  recording = false;
+  //URL of Blob
+  url;
+  error;
+  //
+  sampleRate: number = 44100;
+  bufferSize: number = 16384;
 
   constructor(private modalService: NgbModal,
     private route: ActivatedRoute,
@@ -139,39 +155,122 @@ export class CompositionEditorComponent implements OnInit {
     console.log(this.curTrack);
   }
 
-  recording() {
-    this.isRecording = true;
-    this.recorderService.getUserContent().then(
-      res => {
-        this.recorderService.startRecording();
-        this.soundService.startPlay("play");
-      },
-      err => alert(err));
-    
-  }
-
-  stopRecording() {
-    this.stop();
-    this.isRecording = false;
-    this.recorderService.stopRecording(OutputFormat.WEBM_BLOB).then((output: Blob) => {
-      // do post output steps
-      // console.log(output);
-      this.blob = output;
-      console.log(this.blob);
-      this.soundService.createSound(this.curTrack.id, this.blob).subscribe(
-        sound => {
-          this.curTrack.sounds.push(sound);
-        },
-        err => console.log(err)
-      )
-    }).catch(errorCase => {
-      console.log(errorCase);
-    });
-  }
-
   deleteSound(track: Track) {
     this.soundService.deleteSound(track.sounds[0].id).subscribe();
     track.sounds.pop();
   }
 
+  /**
+   * recording with RTC recorder
+   */
+  /**
+   * Start recording.
+   */
+  initiateRecording() {
+    this.isRecording = true;
+    this.recording = true;
+    this.soundService.startPlay("play");
+    let mediaConstraints = {
+      video: false,
+      audio: true
+    };
+    navigator.mediaDevices
+      .getUserMedia(mediaConstraints)
+      .then(this.successCallback.bind(this), this.errorCallback.bind(this));
+  }
+  /**
+   * Will be called automatically.
+   */
+  successCallback(stream) {
+    var options = {
+      mimeType: "audio/webm",
+      numberOfAudioChannels: 1,
+      sampleRate: 48000,
+      // desiredSampRate: 44100,
+      bufferSize: 16384
+    };
+    //Start Actuall Recording
+    var StereoAudioRecorder = RecordRTC.StereoAudioRecorder;
+    this.record = new StereoAudioRecorder(stream, options);
+    this.record.record();
+  }
+  /**
+   * Stop recording.
+   */
+  stopRecording() {
+    this.stop();
+    this.isRecording = false;
+    this.recording = false;
+    this.record.stop(this.processRecording.bind(this));
+  }
+  /**
+   * processRecording Do what ever you want with blob
+   * @param  {any} blob Blog
+   */
+  processRecording(blob) {
+    this.url = URL.createObjectURL(blob);
+    this.soundService.createSound(this.curTrack.id, blob).subscribe(
+      sound => {
+        this.curTrack.sounds.push(sound);
+      },
+      err => console.log(err)
+    )
+    console.log("blob", blob);
+    console.log("url", this.url);
+  }
+  /**
+   * Process Error.
+   */
+  errorCallback(error) {
+    this.error = 'Can not play audio in your browser';
+  }
+
+  /**
+   * set echantillonnage and buffer size values
+   */
+  setReglages() {
+    console.log(this.sampleRate);
+    console.log(this.bufferSize);
+    this.modalService.dismissAll();
+  }
+
+  /**
+   *  create an array from composition's sounds
+   * @returns array of URL's
+   */
+  getSoundsArray() {
+    let soundsArray = [];
+    for (let track of this.composition.tracks) {
+      soundsArray.push("http://localhost:8080/sound/file/" + track.sounds[0].id);
+    }
+    return soundsArray;
+  }
+
+  /**
+   * create a merge mix of the composition
+   */
+  mergeMix() {
+    let soundArray = this.getSoundsArray();
+    let crunker = new Crunker({ sampleRate: this.sampleRate });
+    crunker
+      .fetchAudio(...soundArray)
+      .then((buffer) => crunker.mergeAudio(buffer))
+      .then(merged => crunker.export(merged, "audio/ogg"))
+      .then(output => {
+        // crunker.download(output.blob);
+        console.log(output);
+        this.soundService.createMix(output.blob).subscribe(
+          sound => {
+            this.composition.blobPath = "http://localhost:8080/sound/file/" + sound.id;
+            this.compositionService.update(this.composition).subscribe(
+              compo => this.composition = compo.body,
+              err => console.log(err))
+          },
+          err => console.log(err)
+        )
+      })
+      .catch(error => {
+        throw new Error(error);
+      });
+  }
 }

@@ -40,4 +40,9 @@ export class CompositionService {
     return this.http.post<Composition>(this.route, composition, {observe: 'response'});
   }
 
+  update(composition:Composition):Observable<HttpResponse<Composition>> {
+    return this.http.put<Composition>(this.route + '/' + composition.id, composition, {observe: 'response'});
+  }
+
+
 }

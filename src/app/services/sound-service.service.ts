@@ -23,6 +23,13 @@ export class SoundServiceService {
 
     return this.http.post<any>(this.route+'/'+id, formData);
   }
+  
+  createMix(blob: Blob): Observable<Sound> {
+    const formData = new FormData();
+    formData.append('file', blob);
+
+    return this.http.post<any>(this.route, formData);
+  }
 
   deleteSound(id: number): Observable<any> {
     return this.http.delete(this.route + '/' + id);
